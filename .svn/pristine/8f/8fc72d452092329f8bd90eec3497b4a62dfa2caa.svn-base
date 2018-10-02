@@ -1,0 +1,27 @@
+package com.itheima.bos.service.impl;
+
+import java.util.Date;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.itheima.bos.dao.WorkordermanagerDao;
+import com.itheima.bos.domain.Workbill;
+import com.itheima.bos.domain.Workordermanage;
+import com.itheima.bos.service.WorkordermanagerService;
+@Service
+@Transactional
+public class WorkordermanagerServiceImpl implements WorkordermanagerService {
+	@Resource
+	private WorkordermanagerDao workordermanagerDao;
+	public void save(Workordermanage model) {
+		// TODO Auto-generated method stub
+		//设置当前系统的时间
+		model.setUpdatetime(new Date());
+		workordermanagerDao.save(model);
+	}
+
+}

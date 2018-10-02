@@ -1,0 +1,36 @@
+package com.itheima.bos.web.action;
+
+import java.io.IOException;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.itheima.bos.domain.Decidedzone;
+import com.itheima.bos.web.action.base.BaseAction;
+@Controller
+@Scope("prototype")
+public class DecidedzoneAction extends BaseAction<Decidedzone> {
+	// 接收分区id
+	private String[] subareaid;
+
+	public void setSubareaid(String[] subareaid) {
+		this.subareaid = subareaid;
+	}
+
+	/**
+	 * 添加定区
+	 * 
+	 * @return
+	 */
+	public String add() {
+		decidedzoneService.save(model, subareaid);
+		return "list";
+	}
+	//分页查询
+	public String queryPage() throws IOException {
+		decidedzoneService.queryPage(pageBean);
+		//以json数据返回
+		this.writePageBean2Json(pageBean, new String[] {"currentPage","pageSize","decidedzones","decidedzone","subareas","detachedCriteria"});
+		return NONE;
+	}
+}
